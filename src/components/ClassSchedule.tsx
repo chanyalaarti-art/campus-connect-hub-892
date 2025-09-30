@@ -9,12 +9,12 @@ const ClassSchedule = () => {
 
   const schedule = {
     Monday: [
-      { time: "9:00 - 10:30 AM", course: "CS301", name: "Data Structures", room: "CS Lab 2", instructor: "Dr. Johnson" },
-      { time: "11:00 AM - 12:30 PM", course: "MATH201", name: "Calculus II", room: "Math 105", instructor: "Prof. Chen" },
-      { time: "2:00 - 3:30 PM", course: "PHY305", name: "Quantum Mechanics", room: "Physics 201", instructor: "Dr. Rodriguez" },
+      { time: "9:00 - 10:30 AM", course: "CF301", name: "Cyber forensic", room: "CS Lab 2", instructor: "Gouri mam" },
+      { time: "11:00 AM - 12:30 PM", course: "PM201", name: "Project Management", room: "PM 305", instructor: "Prof. Shruti" },
+      { time: "2:00 - 3:30 PM", course: "STQ305", name: "Software Testing", room: "STQ 301", instructor: "Pavan Sir" },
     ],
     Tuesday: [
-      { time: "10:00 - 11:30 AM", course: "CS405", name: "Machine Learning", room: "CS Lab 3", instructor: "Dr. Johnson" },
+      { time: "10:00 - 11:30 AM", course: "CS405", name: "Machine Learning", room: "CS Lab 3", instructor: "Prof.Ajay" },
       { time: "1:00 - 2:30 PM", course: "BUS401", name: "Marketing Strategy", room: "Business 108", instructor: "Prof. Kumar" },
     ],
     Wednesday: [
