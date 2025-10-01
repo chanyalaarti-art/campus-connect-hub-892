@@ -20,8 +20,8 @@ const Index = () => {
           <div className="flex items-center gap-2">
             <GraduationCap className="h-8 w-8 text-primary" />
             <div>
-              <h1 className="text-xl font-bold">Campus Portal</h1>
-              <p className="text-xs text-muted-foreground">Your Academic Hub</p>
+              <h1 className="text-xl font-bold">LN College</h1>
+              <p className="text-xs text-muted-foreground">Affiliated to University of Mumbai</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -41,11 +41,21 @@ const Index = () => {
         <div className="container">
           <div className="max-w-3xl">
             <h2 className="text-4xl font-bold tracking-tight mb-4">
-              Welcome to Your Academic Dashboard
+              Welcome to LN College
             </h2>
-            <p className="text-lg text-muted-foreground">
-              Access everything you need for your college journey - from fees and schedules to events and resources.
+            <p className="text-lg text-muted-foreground mb-4">
+              LN Group of Institute - Your hub for quality education and excellence. We provide specialization in various fields with the aim of delivering best quality education.
             </p>
+            <div className="flex flex-wrap gap-4 text-sm">
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Clock className="h-4 w-4" />
+                <span>Mon-Fri: 10 AM - 6 PM</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <span>📍</span>
+                <span>Rajendra Nagar, Borivali East, Mumbai</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -187,12 +197,14 @@ const Index = () => {
             </div>
             <div>
               <h4 className="font-bold mb-4">Connect</h4>
-              <p className="text-sm text-muted-foreground mb-2">Email: info@college.edu</p>
-              <p className="text-sm text-muted-foreground">Phone: (555) 123-4567</p>
+              <p className="text-sm text-muted-foreground mb-2">Email: hellolncollege@gmail.com</p>
+              <p className="text-sm text-muted-foreground mb-2">Phone: 8655507171 | 8655022625</p>
+              <p className="text-sm text-muted-foreground">Near General Kariappa Bridge, 89, FM Cariappa Flyover</p>
+              <p className="text-sm text-muted-foreground">Rajendra Nagar, Borivali East, Mumbai</p>
             </div>
           </div>
           <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-            © 2025 Campus Portal. All rights reserved.
+            © 2025 LN College. All rights reserved. | Affiliated to University of Mumbai
           </div>
         </div>
       </footer>
