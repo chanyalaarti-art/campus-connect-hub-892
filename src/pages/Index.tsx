@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { Bell, BookOpen, Calendar, CreditCard, GraduationCap, Users, FileText, Award, Library, ClipboardList, Clock } from "lucide-react";
+import { Bell, BookOpen, Calendar, GraduationCap, Users, FileText, Library, ClipboardList, Clock } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import FeesDashboard from "@/components/FeesDashboard";
 import FacultyDirectory from "@/components/FacultyDirectory";
 import EventsCalendar from "@/components/EventsCalendar";
-import ScholarshipsSection from "@/components/ScholarshipsSection";
+import LibraryBooks from "@/components/LibraryBooks";
 import CourseCatalog from "@/components/CourseCatalog";
 import ClassSchedule from "@/components/ClassSchedule";
 
@@ -63,14 +62,13 @@ const Index = () => {
       {/* Quick Links */}
       <section className="py-8 border-b">
         <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {[
-              { icon: CreditCard, label: "Pay Fees", color: "text-blue-500" },
               { icon: Calendar, label: "Events", color: "text-green-500" },
               { icon: Users, label: "Faculty", color: "text-purple-500" },
-              { icon: Award, label: "Scholarships", color: "text-yellow-500" },
               { icon: BookOpen, label: "Courses", color: "text-red-500" },
               { icon: Library, label: "Library", color: "text-indigo-500" },
+              { icon: ClipboardList, label: "Schedule", color: "text-orange-500" },
             ].map((item, i) => (
               <Card key={i} className="cursor-pointer hover:border-primary transition-colors">
                 <CardContent className="flex flex-col items-center justify-center p-6 gap-2">
@@ -86,19 +84,14 @@ const Index = () => {
       {/* Main Content */}
       <section className="py-8">
         <div className="container">
-          <Tabs defaultValue="fees" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6">
-              <TabsTrigger value="fees">Fees</TabsTrigger>
+          <Tabs defaultValue="faculty" className="space-y-6">
+            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-5">
               <TabsTrigger value="faculty">Faculty</TabsTrigger>
               <TabsTrigger value="events">Events</TabsTrigger>
-              <TabsTrigger value="scholarships">Scholarships</TabsTrigger>
+              <TabsTrigger value="library">Library</TabsTrigger>
               <TabsTrigger value="courses">Courses</TabsTrigger>
               <TabsTrigger value="schedule">Schedule</TabsTrigger>
             </TabsList>
-
-            <TabsContent value="fees">
-              <FeesDashboard />
-            </TabsContent>
 
             <TabsContent value="faculty">
               <FacultyDirectory />
@@ -108,8 +101,8 @@ const Index = () => {
               <EventsCalendar />
             </TabsContent>
 
-            <TabsContent value="scholarships">
-              <ScholarshipsSection />
+            <TabsContent value="library">
+              <LibraryBooks />
             </TabsContent>
 
             <TabsContent value="courses">
