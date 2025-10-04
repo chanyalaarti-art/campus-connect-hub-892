@@ -14,7 +14,165 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      admissions_info: {
+        Row: {
+          application_deadline: string | null
+          created_at: string
+          description: string | null
+          duration: string
+          eligibility: string
+          fee_structure: string
+          id: string
+          program_name: string
+          requirements: string[] | null
+          seats_available: number | null
+        }
+        Insert: {
+          application_deadline?: string | null
+          created_at?: string
+          description?: string | null
+          duration: string
+          eligibility: string
+          fee_structure: string
+          id?: string
+          program_name: string
+          requirements?: string[] | null
+          seats_available?: number | null
+        }
+        Update: {
+          application_deadline?: string | null
+          created_at?: string
+          description?: string | null
+          duration?: string
+          eligibility?: string
+          fee_structure?: string
+          id?: string
+          program_name?: string
+          requirements?: string[] | null
+          seats_available?: number | null
+        }
+        Relationships: []
+      }
+      fee_deadlines: {
+        Row: {
+          amount: number
+          applicable_to: string[] | null
+          created_at: string
+          description: string | null
+          due_date: string
+          id: string
+          late_fee: number | null
+          title: string
+        }
+        Insert: {
+          amount: number
+          applicable_to?: string[] | null
+          created_at?: string
+          description?: string | null
+          due_date: string
+          id?: string
+          late_fee?: number | null
+          title: string
+        }
+        Update: {
+          amount?: number
+          applicable_to?: string[] | null
+          created_at?: string
+          description?: string | null
+          due_date?: string
+          id?: string
+          late_fee?: number | null
+          title?: string
+        }
+        Relationships: []
+      }
+      fee_payments: {
+        Row: {
+          amount_paid: number
+          fee_deadline_id: string | null
+          id: string
+          payment_date: string
+          payment_method: string | null
+          status: string
+          student_id: string | null
+          transaction_id: string | null
+        }
+        Insert: {
+          amount_paid: number
+          fee_deadline_id?: string | null
+          id?: string
+          payment_date?: string
+          payment_method?: string | null
+          status?: string
+          student_id?: string | null
+          transaction_id?: string | null
+        }
+        Update: {
+          amount_paid?: number
+          fee_deadline_id?: string | null
+          id?: string
+          payment_date?: string
+          payment_method?: string | null
+          status?: string
+          student_id?: string | null
+          transaction_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fee_payments_fee_deadline_id_fkey"
+            columns: ["fee_deadline_id"]
+            isOneToOne: false
+            referencedRelation: "fee_deadlines"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fee_payments_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          department: string | null
+          email: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          role: string
+          semester: number | null
+          student_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          department?: string | null
+          email: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          role?: string
+          semester?: number | null
+          student_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          department?: string | null
+          email?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          role?: string
+          semester?: number | null
+          student_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

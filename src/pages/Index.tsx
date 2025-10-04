@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Bell, BookOpen, Calendar, GraduationCap, Users, FileText, Library, ClipboardList, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Bell, BookOpen, Calendar, GraduationCap, Users, FileText, Library, ClipboardList, Clock, LogOut, User } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,8 +10,49 @@ import EventsCalendar from "@/components/EventsCalendar";
 import LibraryBooks from "@/components/LibraryBooks";
 import CourseCatalog from "@/components/CourseCatalog";
 import ClassSchedule from "@/components/ClassSchedule";
+import FeesDashboard from "@/components/FeesDashboard";
+import AdmissionsSection from "@/components/AdmissionsSection";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Index = () => {
+  const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Listen for auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    toast({
+      title: "Signed out",
+      description: "You have been successfully signed out.",
+    });
+    navigate("/auth");
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -30,7 +72,28 @@ const Index = () => {
                 3
               </Badge>
             </Button>
-            <Button>Student Login</Button>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <User className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => navigate("/profile")}>
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleSignOut}>
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button onClick={() => navigate("/auth")}>Student Login</Button>
+            )}
           </div>
         </div>
       </header>
@@ -85,12 +148,14 @@ const Index = () => {
       <section className="py-8">
         <div className="container">
           <Tabs defaultValue="faculty" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-5">
+            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-7">
               <TabsTrigger value="faculty">Faculty</TabsTrigger>
               <TabsTrigger value="events">Events</TabsTrigger>
               <TabsTrigger value="library">Library</TabsTrigger>
               <TabsTrigger value="courses">Courses</TabsTrigger>
               <TabsTrigger value="schedule">Schedule</TabsTrigger>
+              <TabsTrigger value="fees">Fees</TabsTrigger>
+              <TabsTrigger value="admissions">Admissions</TabsTrigger>
             </TabsList>
 
             <TabsContent value="faculty">
@@ -111,6 +176,14 @@ const Index = () => {
 
             <TabsContent value="schedule">
               <ClassSchedule />
+            </TabsContent>
+
+            <TabsContent value="fees">
+              <FeesDashboard />
+            </TabsContent>
+
+            <TabsContent value="admissions">
+              <AdmissionsSection />
             </TabsContent>
           </Tabs>
         </div>
