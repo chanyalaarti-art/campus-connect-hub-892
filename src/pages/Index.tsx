@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BookOpen, Calendar, GraduationCap, Users, FileText, Library, ClipboardList, TrendingUp, Award } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
+  const navigate = useNavigate();
+  
   const quickLinks = [
     { icon: Calendar, label: "Events", color: "text-green-500", path: "/events" },
     { icon: Users, label: "Faculty", color: "text-purple-500", path: "/faculty" },
@@ -34,21 +36,48 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background animate-fade-in">
       {/* Hero Section */}
-      <section className="border-b bg-gradient-to-br from-primary/10 via-primary/5 to-background py-20">
+      <section className="border-b bg-gradient-to-br from-primary/10 via-primary/5 to-background py-12 md:py-20">
         <div className="container">
           <div className="max-w-3xl space-y-6">
-            <h1 className="text-5xl font-bold tracking-tight">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
               Welcome to <span className="text-primary">LN College</span>
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
               Your gateway to quality education and excellence. We specialize in various fields with the aim of delivering the best educational experience in Mumbai.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" asChild>
-                <Link to="/admissions">Apply Now</Link>
-              </Button>
+            
+            {/* Apply for Campus CTA */}
+            <Card className="border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-accent/5 shadow-lg">
+              <CardContent className="py-6 md:py-8 px-4 md:px-6">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 md:p-3 rounded-full bg-primary/10">
+                      <GraduationCap className="h-6 w-6 md:h-8 md:w-8 text-primary" />
+                    </div>
+                    <div>
+                      <h2 className="text-xl md:text-2xl font-bold">Start Your Journey With Us</h2>
+                      <p className="text-sm md:text-base text-muted-foreground">One application connects you to all portals</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Button size="lg" className="flex-1" onClick={() => navigate("/apply-for-campus")}>
+                      <GraduationCap className="mr-2 h-5 w-5" />
+                      Apply for Campus
+                    </Button>
+                    <Button size="lg" variant="outline" className="flex-1" onClick={() => navigate("/application-status")}>
+                      Check Application Status
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="flex flex-wrap gap-4 pt-2">
               <Button size="lg" variant="outline" asChild>
                 <Link to="/courses">Explore Courses</Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <Link to="/admissions">View Programs</Link>
               </Button>
             </div>
             <div className="flex flex-wrap gap-6 text-sm pt-4">

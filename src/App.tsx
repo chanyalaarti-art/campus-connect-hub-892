@@ -15,6 +15,8 @@ import Admissions from "./pages/Admissions";
 import Exams from "./pages/Exams";
 import Assignments from "./pages/Assignments";
 import SubmitAssignment from "./pages/SubmitAssignment";
+import ApplyForCampus from "./pages/ApplyForCampus";
+import ApplicationStatus from "./pages/ApplicationStatus";
 import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
@@ -46,6 +48,8 @@ const App = () => (
               <Route path="/assignments" element={<Assignments />} />
               <Route path="/assignments/submit" element={<SubmitAssignment />} />
               <Route path="/assignments/submit/:id" element={<SubmitAssignment />} />
+              <Route path="/apply-for-campus" element={<ApplyForCampus />} />
+              <Route path="/application-status" element={<ApplicationStatus />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
