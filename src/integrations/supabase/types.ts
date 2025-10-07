@@ -53,6 +53,54 @@ export type Database = {
         }
         Relationships: []
       }
+      applications: {
+        Row: {
+          address: string
+          course: string
+          created_at: string | null
+          date_of_birth: string
+          department: string
+          documents: Json | null
+          email: string
+          full_name: string
+          id: string
+          phone: string
+          status: Database["public"]["Enums"]["application_status"] | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          address: string
+          course: string
+          created_at?: string | null
+          date_of_birth: string
+          department: string
+          documents?: Json | null
+          email: string
+          full_name: string
+          id?: string
+          phone: string
+          status?: Database["public"]["Enums"]["application_status"] | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          address?: string
+          course?: string
+          created_at?: string | null
+          date_of_birth?: string
+          department?: string
+          documents?: Json | null
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string
+          status?: Database["public"]["Enums"]["application_status"] | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       fee_deadlines: {
         Row: {
           amount: number
@@ -181,7 +229,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      application_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -308,6 +356,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      application_status: ["pending", "approved", "rejected"],
+    },
   },
 } as const
